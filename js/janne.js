@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    
 $("#start").click(function(){
     $("#subWrapper button, h2, h3").remove();
     $("#subWrapper").addClass("beach_dark_gold");
