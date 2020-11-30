@@ -215,3 +215,8 @@ img.img_max {
     #kultakala{
         min-width: 200px;
     }
+    
+    #answerButtons {
+        padding-top: 5em;
+        padding-bottom: 5em;
+    }

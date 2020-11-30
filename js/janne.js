@@ -193,7 +193,7 @@ let game = {
         $("#subWrapper").append("<h3>Vääriä vastauksia oli: " + this.incorrect + "</h3>");
         $("#subWrapper").append("<h3>Vastaamattomaksi jäi:  " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
         $("#subWrapper").append("<div class='col-12'><a class='text-white' href='index.html'><button id='etusivulle_janne' class='button'>Etusivulle</button></a></div>");
-        $("#subWrapper").append("<div class='col-12'><a class='text-white' href='pohja.html'><button id='alkuun_janne' class='button'>Takaisin Alkuun</button></a></div>");
+        $("#subWrapper").append("<div class='col-12'><a class='text-white' href='jannevisa1.html'><button id='alkuun_janne' class='button'>Takaisin Alkuun</button></a></div>");
     },
 
     resultFinish: function(){
@@ -227,7 +227,7 @@ let game = {
         $("#subWrapper").append("<h3>Vääriä vastauksia oli: " + this.incorrect + "</h3>");
         $("#subWrapper").append("<h3>Vastaamattomaksi jäi: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
         $("#subWrapper").append("<div class='col-12'><a class='text-white' href='index.html'><button id='etusivulle_janne' class='button'>Etusivulle</button></a></div>");
-        $("#subWrapper").append("<div class='col-12'><a class='text-white' href='pohja.html'><button id='alkuun_janne' class='button'>Takaisin Alkuun</button></a></div>");    
+        $("#subWrapper").append("<div class='col-12'><a class='text-white' href='jannevisa1.html'><button id='alkuun_janne' class='button'>Takaisin Alkuun</button></a></div>");    
     }
 };
 
@@ -237,9 +237,132 @@ let game = {
 
 $("#start1").click(function(){
     $("#subWrapper1 button, h2, h3").remove();
-    $("#subWrapper1").addClass("beach_dark_gold");
-    $("#kultakala").addClass("float-left, fixed-bottom");
-    $("#finish1").toggleClass("collapse");
+    $("#answerButtons").toggleClass("collapse");
+    game1.start();
 });
+
+
+let questions1 = [{
+    question:"Kuka valtasi Akemenidien  Imperiumin?", 
+    answers:["Aleksanteri Suuri", "Erwin Rommel", "Julius Caesar", "Matti Meikäläinen"],
+    correctAnswer:"Aleksanteri Suuri"
+}, {
+    question:"Kuka on Suomen presidentti?", 
+    answers:["Sauli Niinistö", "Tarja Halonen", "Petteri Koponen", "Pekka Pouta"],
+    correctAnswer:"Sauli Niinistö"
+}, {
+    question:"Milloin talvisota alkoi?", 
+    answers:[ "Viime kesänä", "2110-luvulla", "1939-luvulla", "2001-luvulla"],
+    correctAnswer: "1939-luvulla"
+}, {
+    question:"Kuka oli antiikin Kreikkalaisten suurin jumala?", 
+    answers:["Zeus", "Athena", "Ares", "Poseidon"],
+    correctAnswer:"Zeus"
+}, {
+    question:"Kuka oli Palestiinan hallitsija Jeesuksen syntyessä?", 
+    answers:["Kaarle XVI Kustaa", "Kuningatar Viktoria", "Herodes Suuri", "Vladimir Putin"],
+    correctAnswer:"Herodes Suuri"
+}, {
+    question:"Kuka saattoi Juutalaiset luvattuun maahan Egyptiläisten kynsistä?", 
+    answers:["Alexander Stubb", "Risto Räppääjä", "Päivi Räsänen", "Mooses"],
+    correctAnswer:"Mooses"
+},];
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+let game1 = {
+    correct: 0,
+    incorrect: 0,
+    current: 0,
+    
+    start: function(){
+        if (questions1.length <= 0) {
+            game1.result();
+            return;
+        };
+        game1.current = getRndInteger(0, questions1.length - 1);
+        $("#kysymys").html("<h3>" + questions1[game1.current].question + "</h3>");
+        $("#valinta-a").prop("value", questions1[game1.current].answers[0]);
+        $("#valinta-b").prop("value", questions1[game1.current].answers[1]);
+        $("#valinta-c").prop("value", questions1[game1.current].answers[2]);
+        $("#valinta-d").prop("value", questions1[game1.current].answers[3]);
+        $("#valinta-a").html("<p>" + questions1[game1.current].answers[0] + "</p>");
+        $("#valinta-b").html("<p>" + questions1[game1.current].answers[1] + "</p>");
+        $("#valinta-c").html("<p>" + questions1[game1.current].answers[2] + "</p>");
+        $("#valinta-d").html("<p>" + questions1[game1.current].answers[3]  + "</p>");
+    },
+
+    result: function(){
+        $("#kultakala").remove();
+        $("header").toggleClass("collapse");
+        $("#answerButtons").toggleClass("collapse");
+        $("#kysymys h3").remove();
+
+        
+        if (game1.correct > 4) {
+            $("#kysymys").html("<img src='img/kultakala-janne.png' alt='no-tahti' class='img-fluid col-2' id='kultakala'></img>");
+            $("#kysymys").append("<h3> Kultakala sai kruunuansa takaisin! Hyvin tehty! <i class='far fa-star fa-lg'></i>");
+
+            $("main").removeClass("beach_green");
+            $("main").addClass("bg-success");
+
+            $("#kysymys").append("<div class='col-12'><a class='text-white' href='index.html'><button id='etusivulle_janne' class='button'>Etusivulle</button></a></div>");
+            $("#kysymys").append("<div class='col-12'><a class='text-white' href='jannevisa2.html'><button id='alkuun_janne' class='button'>Takaisin Alkuun</button></a></div>");
+
+        } else if(game1.correct > 2){
+            $("#kysymys").html("<img src='img/kultakala-janne-ilman-kruunua.png' alt='no-tahti' class='img-fluid col-2' id='kultakala'></img>");
+            $("#kysymys").append("<h3>Läheltä piti, mutta kultakala ei saanut kruunuansa takaisin...<i class='fas fa-star-half-alt fa-lg'></i>");
+
+            $("main").removeClass("beach_green");
+            $("main").addClass("bg-warning");
+
+            $("#kysymys").append("<div class='col-12'><a class='text-white' href='index.html'><button id='etusivulle_janne' class='button'>Etusivulle</button></a></div>");
+            $("#kysymys").append("<div class='col-12'><a class='text-white' href='jannevisa2.html'><button id='alkuun_janne' class='button'>Yritä uudelleen!</button></a></div>");
+        } else {
+            $("#kysymys").html("<img src='img/kultakala-janne-ilman-kruunua.png' alt='no-tahti' class='img-fluid col-2' id='kultakala'></img>");
+            $("#kysymys").append("<h3>Eii! Kruunuvaras pääsi karkuun! <i class='fas fa-star-half-alt fa-lg'></i>");
+
+            $("main").removeClass("beach_green");
+            $("main").addClass("beach_dark_red");
+
+            $("#kysymys").append("<div class='col-12'><a class='text-white' href='index.html'><button id='etusivulle_janne' class='button'>Etusivulle</button></a></div>");
+            $("#kysymys").append("<div class='col-12'><a class='text-white' href='jannevisa2.html'><button id='alkuun_janne' class='button'>Yritä uudelleen!</button></a></div>");
+        };
+    },
+};
+
+$("#valinta-a, #valinta-b, #valinta-c, #valinta-d").click(function(){
+    $("#valinta-a, #valinta-b, #valinta-c, #valinta-d").attr("disabled", true)
+    setTimeout(function(){
+        $("#valinta-a, #valinta-b, #valinta-c, #valinta-d").attr("disabled", false)
+    }, 1300);
+
+    if ($(this).val() == questions1[game1.current].correctAnswer) {
+        $("main").removeClass("beach_green");
+        $("main").addClass("bg-success");
+        setTimeout(function(){
+            questions1.splice(game1.current, 1)
+            game1.correct++;
+            $("main").removeClass("bg-success");
+            $("main").addClass("beach_green");
+            game1.start();
+        }, 1000);
+    } else {
+        $("main").removeClass("beach_green");
+        $("main").addClass("beach_dark_red");
+        setTimeout(function(){
+            questions1.splice(game1.current, 1)
+            game1.incorrect++;
+            $("main").removeClass("beach_dark_red");
+            $("main").addClass("beach_green");
+            game1.start();
+        }, 1000);
+    };
+    
+});
+
+
+
 
 });
