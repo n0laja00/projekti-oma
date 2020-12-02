@@ -268,7 +268,7 @@ let questions1 = [{
     correctAnswer:"Mooses"
 },];
 
-//Toka visa alkaa tästä!
+
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
